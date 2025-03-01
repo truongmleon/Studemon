@@ -1,42 +1,60 @@
 import pygame
-import button
+from settings import *
 
 # pygame setup
-pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()
-running = True
-dt = 0
+class Game:
+    def __init__(self):
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+        # initialize pygame
+        pygame.init()
 
-while running:
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-            
-    bg = pygame.image.load("images/other/startscreen.png")
-    screen.blit(bg, (0, -300))
+        # create window
+        self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        
+        # --------------------------
+        bg = pygame.image.load("images/other/startscreen.png")
+        screen.blit(bg, (0, -300))
     
-    start_button = button.Button(300, 300, img, 1)
+        start_button = button.Button(300, 300, img, 1)
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+        # --------------------------
+        
+        # set window title
+        pygame.display.set_caption("Studemon")
+        self.running = True
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
+        # creating sprite goups
+        self.all_sprites = pygame.sprite.Group()
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+        # create a clock object to help track frame rate
+        self.clock = pygame.time.Clock()
 
-    # limits FPS to 60
-    dt = clock.tick(60) / 1000
 
-pygame.quit()
+    def run(self):
+        """ Game loop """
+        while self.running:
+
+            # Controling the frame rate and get the delta (dt) in seconds
+            dt = self.clock.tick() / 1000
+
+            # Event handling
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+
+            # update sprites
+            self.all_sprites.update(dt)
+
+            # Draw sprites
+            self.all_sprites.draw(self.window)
+
+            # update the display
+            pygame.display.update()
+            
+        pygame.quit()
+
+    
+# Run the game
+if __name__ == "__main__":
+    game = Game()
+    game.run()
