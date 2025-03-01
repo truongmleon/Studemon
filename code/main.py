@@ -1,4 +1,5 @@
 import pygame
+import button
 
 # pygame setup
 pygame.init()
@@ -16,8 +17,9 @@ while running:
             running = False
             
     bg = pygame.image.load("images/other/startscreen.png")
-    # fill the screen with a color to wipe away anything from last frame
     screen.blit(bg, (0, -300))
+    
+    start_button = button.Button(300, 300, img, 1)
 
     pygame.draw.circle(screen, "red", player_pos, 40)
 
