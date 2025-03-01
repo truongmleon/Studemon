@@ -10,15 +10,7 @@ class Game:
 
         # create window
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        
-        # --------------------------
-        bg = pygame.image.load("images/other/startscreen.png")
-        screen.blit(bg, (0, -300))
-    
-        start_button = button.Button(300, 300, img, 1)
 
-        # --------------------------
-        
         # set window title
         pygame.display.set_caption("Studemon")
         self.running = True
@@ -42,6 +34,16 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
+            player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)
+            img = pygame.image.load("path/to/button_image.png").convert_alpha()  # Load image before using it
+    
+            # --------------------------
+            bg = pygame.image.load("images/other/startscreen.png")
+            self.window.blit(bg, (0, -300))
+        
+            start_button = button.Button(300, 300, img, 1)
+
+            # --------------------------
             # update sprites
             self.all_sprites.update(dt)
 
