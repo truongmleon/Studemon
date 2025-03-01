@@ -1,40 +1,51 @@
 import pygame
+from settings import *
 
 # pygame setup
-pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()
-running = True
-dt = 0
+class Game:
+    def __init__(self):
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+        # initialize pygame
+        pygame.init()
 
-while running:
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+        # create window
+        self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+        # set window title
+        pygame.display.set_caption("Studemon")
+        self.running = True
+
+        # creating sprite goups
+        self.all_sprites = pygame.sprite.Group()
+
+        # create a clock object to help track frame rate
+        self.clock = pygame.time.Clock()
+
+
+    def run(self):
+        """ Game loop """
+        while self.running:
+
+            # Controling the frame rate and get the delta (dt) in seconds
+            dt = self.clock.tick() / 1000
             
-    bg = pygame.image.load("images/other/startscreen.png")
-    # fill the screen with a color to wipe away anything from last frame
-    screen.blit(bg, (0, -300))
+            # Event handling
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+            # update sprites
+            self.all_sprites.update(dt)
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
+            # Draw sprites
+            self.all_sprites.draw(self.window)
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+            # update the display
+            pygame.display.update()
+            
+        pygame.quit()
 
-    # limits FPS to 60
-    dt = clock.tick(60) / 1000
-
-pygame.quit()
+# Run the game
+if __name__ == "__main__":
+    game = Game()
+    game.run()
