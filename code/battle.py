@@ -44,6 +44,9 @@ class Battle:
         self.back_surfs = folder_importer('images', 'back-sprites')  # Store images as a dictionary
         self.front_surfs = folder_importer('images', 'studemon-sprites')
         self.bg_surfs = folder_importer('images', 'other')
+        # kevin import
+        self.kev = pygame.image.load("images/characters/Kevin.png").convert_alpha()
+        self.kev = pygame.transform.scale(self.kev, (int(self.kev.get_width() * 10), int(self.kev.get_height() * 10)))
 
     def run(self):
         """ Game loop """
@@ -73,6 +76,7 @@ class Battle:
             
             # Draw the cropped section of the zoomed background
             self.window.blit(zoomed_bg, (0, 0), crop_rect)
+            self.window.blit(self.kev, (900, -10))
 
             # update sprites
             self.all_sprites.update(dt)
