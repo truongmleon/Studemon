@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 
-class Options:
+class EditSet:
     def __init__(self):
         pygame.init()
 
