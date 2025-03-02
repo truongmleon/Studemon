@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 
-class Pickstarter:
+class PickStarter:
     def __init__(self, data):
         pygame.init()
         self.to_kevin = False
@@ -22,15 +22,15 @@ class Pickstarter:
         self.image = pygame.image.load("images/characters/Prof.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (int(self.image.get_width() * 21), int(self.image.get_height() * 21)))
 
-        self.frone_img = pygame.image.load("images/studemon-sprites/Frone Thumbnail.png").convert_alpha() 
+        self.frone_img = pygame.image.load("images/studemon-sprites/Frone.png").convert_alpha() 
         self.frone_img = pygame.transform.scale(self.frone_img, (int(self.frone_img.get_width() * 0.75), int(self.frone_img.get_height() * 0.75)))
         self.window.blit(self.frone_img, (950, 460))
 
-        self.intiggy_img = pygame.image.load("images/studemon-sprites/Intiggy Thumbnail.png").convert_alpha() 
+        self.intiggy_img = pygame.image.load("images/studemon-sprites/Intiggy.png").convert_alpha() 
         self.intiggy_img = pygame.transform.scale(self.intiggy_img, (int(self.intiggy_img.get_width() * 0.75), int(self.intiggy_img.get_height() * 0.75)))
         self.window.blit(self.intiggy_img, (100, 450))
 
-        self.noed_img = pygame.image.load("images/studemon-sprites/Noed Thumbnail.png").convert_alpha() 
+        self.noed_img = pygame.image.load("images/studemon-sprites/Noed.png").convert_alpha() 
         self.noed_img = pygame.transform.scale(self.noed_img, (int(self.noed_img.get_width() * 0.75), int(self.noed_img.get_height() * 0.75)))
         self.window.blit(self.noed_img, (500, 520))
 
@@ -41,7 +41,8 @@ class Pickstarter:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.window.fill((255, 255, 255))  # White background
+            bg = pygame.image.load("images/other/Lab.png")
+            self.window.blit(bg, (0, 0))
             textbox = pygame.image.load("images/buttons/textbox.png").convert_alpha()
             textbox = pygame.transform.scale(textbox, (int(textbox.get_width() * 9), int(textbox.get_height() * 9)))
             self.window.blit(self.frone_img, (950, 410))

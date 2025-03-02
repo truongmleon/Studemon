@@ -42,15 +42,15 @@ class Game:
             start_button = button.Button("start", WINDOW_WIDTH / 2 - 45 * 3 - 20, 300, start_img, 7)
             options_button = button.Button("options", WINDOW_WIDTH / 2 - 45 * 3 - 20, 430, options_img, 7)
 
-            frone_img = pygame.image.load("images/studemon-sprites/Frone Thumbnail.png").convert_alpha() 
+            frone_img = pygame.image.load("images/studemon-sprites/Frone.png").convert_alpha() 
             frone_img = pygame.transform.scale(frone_img, (int(frone_img.get_width() * 0.75), int(frone_img.get_height() * 0.75)))
             self.window.blit(frone_img, (950, 460))
 
-            intiggy_img = pygame.image.load("images/studemon-sprites/Intiggy Thumbnail.png").convert_alpha() 
+            intiggy_img = pygame.image.load("images/studemon-sprites/Intiggy.png").convert_alpha() 
             intiggy_img = pygame.transform.scale(intiggy_img, (int(intiggy_img.get_width() * 0.75), int(intiggy_img.get_height() * 0.75)))
             self.window.blit(intiggy_img, (100, 450))
 
-            noed_img = pygame.image.load("images/studemon-sprites/Noed Thumbnail.png").convert_alpha() 
+            noed_img = pygame.image.load("images/studemon-sprites/Noed.png").convert_alpha() 
             noed_img = pygame.transform.scale(noed_img, (int(noed_img.get_width() * 0.75), int(noed_img.get_height() * 0.75)))
             self.window.blit(noed_img, (500, 520))
 

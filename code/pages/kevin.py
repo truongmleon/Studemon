@@ -1,6 +1,6 @@
 import pygame
 from settings import *
-from pages.lab import Lab
+from pages.pickstarter import PickStarter
 
 class Kevin:
     def __init__(self, data):
@@ -46,7 +46,7 @@ class Kevin:
                 self.draw_text("I LOVE KESHI AND ICE COFFEE BOBA!!", 160, 230)
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    lab = Lab()
+                    lab = PickStarter(self.data)
                     lab.run()
 
                 # Update the display
