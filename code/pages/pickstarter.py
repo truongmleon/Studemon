@@ -41,6 +41,18 @@ class PickStarter:
                 if event.type == pygame.QUIT:
                     self.running = False
 
+                # Handle key presses for picking a starter
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_1:
+                        self.player_choice = 1  # Save the player's choice as 1
+                        self.running = False  # Exit the loop to finalize the choice
+                    elif event.key == pygame.K_2:
+                        self.player_choice = 2  # Save the player's choice as 2
+                        self.running = False
+                    elif event.key == pygame.K_3:
+                        self.player_choice = 3  # Save the player's choice as 3
+                        self.running = False
+
             bg = pygame.image.load("images/other/Lab.png")
             self.window.blit(bg, (0, 0))
             textbox = pygame.image.load("images/buttons/textbox.png").convert_alpha()
@@ -61,6 +73,7 @@ class PickStarter:
             pygame.display.flip()
 
         pygame.quit()
+        print(f"Player chose: {self.player_choice}")
         
     def draw_text(self, text, x, y):
         """ Helper function to draw text on the screen """
