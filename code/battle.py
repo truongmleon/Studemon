@@ -28,8 +28,7 @@ class Battle:
             player_studemon_list = ['Noed']
         else:
             player_studemon_list = ['Frone']
-            
-        #player_studemon_list = ['Frone', 'Noed', 'Intiggy'] #change this when sprites
+
         
         self.player_studemon = [Monster(name, self.back_surfs.get(name, self.back_surfs[name])) for name in player_studemon_list]
         self.monster = self.player_studemon[0]
