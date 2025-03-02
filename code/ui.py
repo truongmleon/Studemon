@@ -11,19 +11,36 @@ class UI:
         # controls
         self.general_options = ['fight', 'studemon', 'switch', 'run']
         self.general_index = {'col': 0, 'row': 0}
+        self.attack_index = {'col': 0, 'row': 0}
+        self.state = 'general'
         
     def input(self):
         keys = pygame.key.get_pressed()
+        
+        if self.state == 'general':
+            # Temporary variables to update movement
+            new_col = self.general_index['col'] + int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
+            new_row = self.general_index['row'] + int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
 
-        # Temporary variables to update movement
-        new_col = self.general_index['col'] + int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
-        new_row = self.general_index['row'] + int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+            # Prevent going out of bounds (valid range: 0 to 1)
+            self.general_index['col'] = max(0, min(1, new_col))
+            self.general_index['row'] = max(0, min(1, new_row))
+            if keys[pygame.K_SPACE]:
+                self.state = self.general_options[self.general_index['col'] + self.general_index['row'] * 2]
+                
+        elif self.state == 'attack':
+            # Temporary variables to update movement
+            new_col = self.attack_index['col'] + int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
+            new_row = self.attack_index['row'] + int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
 
-        # Prevent going out of bounds (valid range: 0 to 1)
-        self.general_index['col'] = max(0, min(1, new_col))
-        self.general_index['row'] = max(0, min(1, new_row))
-
-    def general(self):
+            # Prevent going out of bounds (valid range: 0 to 1)
+            self.general_index['col'] = max(0, min(1, new_col))
+            self.general_index['row'] = max(0, min(1, new_row))
+            if keys[pygame.K_SPACE]:
+                self.state = self.general_options[self.general_index['col'] + self.general_index['row'] * 2]
+                
+                
+    def quad_select(self, index, options):
         rect = pygame.Rect(self.left + 40, self.top + 60, 400, 200)
         pygame.draw.rect(self.window, COLORS['white'], rect, 0, 4)
         pygame.draw.rect(self.window, COLORS['gray'], rect, 4, 4)
@@ -36,10 +53,9 @@ class UI:
                 y = rect.top + rect.height / 4 + (rect.height / 2) * row
                 i = col + 2 * row  # Calculate index in the list
 
-                is_selected = (self.general_index['col'] == col and self.general_index['row'] == row)
-                color = COLORS['gray'] if is_selected else COLORS['black']
+                color = COLORS['gray'] if col == index['col'] and row == index['row'] else COLORS['black']  
                 
-                text_surf = self.font.render(self.general_options[i], True, color)
+                text_surf = self.font.render(options[i], True, color)
                 text_rect = text_surf.get_rect(center=(x, y))
                 self.window.blit(text_surf, text_rect)
                 
@@ -47,4 +63,7 @@ class UI:
         self.input()
         
     def draw(self):
-        self.general()
+        match self.state:
+            case 'general': self.quad_select(self.general_index, self.general_options)
+            case 'attack': self.quad_select(self.attack_index, self.monster.abilities)
+        

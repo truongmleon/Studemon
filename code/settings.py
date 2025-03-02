@@ -13,11 +13,8 @@ COLORS = {
 
 MONSTER_DATA = {
     'Frone':    {'element': 'fire', 'health': 70},
-    'Frubber':   {'element': 'fire', 'health': 150},
     'Intiggy':    {'element': 'water', 'health': 70},
-    'Infinibrawl':   {'element': 'water', 'health': 180},
-    'Nod':    {'element': 'grass', 'health': 70},
-    'Nodree': {'element': 'grass', 'health': 250},
+    'Noed':    {'element': 'grass', 'health': 70},
 }
 
 ABILITIES_DATA = {
