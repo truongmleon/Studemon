@@ -19,6 +19,11 @@ class UI:
         self.general_buttons = []
         pygame.key.set_repeat(0)  # Disable key repeat to avoid multiple events
 
+        # Input text box variables
+        self.input_text = ""
+        self.active = False
+        self.max_chars = 30  # Maximum characters in input box
+
 
     def input(self):
         """Handle mouse clicks and keyboard input."""
@@ -35,32 +40,73 @@ class UI:
                         if rect.collidepoint(mouse_x, mouse_y):  # Check if clicked inside button
                             if self.general_options[i] == 'fight':
                                 self.state = 'textbox'  # Switch to textbox state
+                                self.active = True  # Activate text input
                             else:
                                 print(f"Selected: {self.general_options[i]}")  # Debugging
                 
-                elif self.state == 'textbox':  # Click anywhere to return to main menu
-                    print("Mouse clicked in textbox state, returning to 'general'")
-                    self.state = 'general'  # Return to general menu
+                elif self.state == 'textbox':  # Check if clicking in text box
+                    box_rect = pygame.Rect(50, WINDOW_HEIGHT - 150, WINDOW_WIDTH - 100, 100)
+                    if box_rect.collidepoint(mouse_x, mouse_y):
+                        self.active = True  # Activate the input box
+                    else:
+                        # If they click outside the box but inside textbox state, submit input
+                        print(f"Input submitted: {self.input_text}")
+                        self.active = False
+                        # Optionally reset input text or return to general menu
+                        # self.input_text = ""
+                        # self.state = 'general'
 
-            # Process the Enter key only once
+            # Process keyboard input for the text box
             elif event.type == pygame.KEYDOWN:
-                if self.state == 'textbox' and event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-                    print("Enter pressed! Changing state to 'general'")  # Debugging
-                    self.state = 'general'  # Return to general menu
-                    pygame.time.delay(100)
-                    # Prevent multiple Enter key detections
-                    pygame.event.clear(pygame.KEYDOWN)  # Only remove excess KEYDOWN events
+                if self.state == 'textbox':
+                    if event.key == pygame.K_RETURN:
+                        print(f"Input submitted: {self.input_text}")
+                        self.active = False
+                        self.state = 'general'  # Return to general menu
+                        # Optionally reset input text
+                        # self.input_text = ""
+                        pygame.time.delay(100)
+                        pygame.event.clear(pygame.KEYDOWN)  # Clear excess KEYDOWN events
+                    elif event.key == pygame.K_BACKSPACE:
+                        self.input_text = self.input_text[:-1]  # Remove last character
+                    elif event.key == pygame.K_ESCAPE:
+                        self.active = False
+                        self.state = 'general'  # Cancel and return to general menu
+                    else:
+                        # Add character if not at max length
+                        if len(self.input_text) < self.max_chars:
+                            self.input_text += event.unicode
 
 
-    def draw_textbox(self, message):
-        """Draws a text box at the bottom of the screen."""
+    def draw_textbox(self, message=None):
+        """Draws an input text box at the bottom of the screen."""
         box_rect = pygame.Rect(50, WINDOW_HEIGHT - 150, WINDOW_WIDTH - 100, 100)
-        pygame.draw.rect(self.window, COLORS['white'], box_rect, 0, 4)
-        pygame.draw.rect(self.window, COLORS['black'], box_rect, 4, 4)
+        
+        # Box background color changes when active
+        bg_color = COLORS['white']
+        if self.active:
+            bg_color = (220, 220, 255)  # Light blue when active
+            
+        pygame.draw.rect(self.window, bg_color, box_rect, 0, 4)
+        
+        # Border color changes when active
+        border_color = COLORS['gray'] if self.active else COLORS['black']
+        pygame.draw.rect(self.window, border_color, box_rect, 4, 4)
 
-        text_surf = self.font.render(message, True, COLORS['black'])
-        text_rect = text_surf.get_rect(center=box_rect.center)
+        # Draw the input text
+        text_surf = self.font.render(self.input_text, True, COLORS['black'])
+        text_rect = text_surf.get_rect(midleft=(box_rect.left + 20, box_rect.centery))
         self.window.blit(text_surf, text_rect)
+        
+        # Draw blinking cursor when active
+        if self.active and pygame.time.get_ticks() % 1000 < 500:  # Blink every half second
+            cursor_x = text_rect.right + 2
+            cursor_y = text_rect.top
+            cursor_height = text_rect.height
+            pygame.draw.line(self.window, COLORS['black'], 
+                            (cursor_x, cursor_y), 
+                            (cursor_x, cursor_y + cursor_height), 
+                            2)
 
     def quad_select(self, index, options, button_list):
         """Draws a selection box and stores button positions with hover effect."""
@@ -101,4 +147,4 @@ class UI:
         if self.state == 'general':
             self.quad_select(self.general_index, self.general_options, self.general_buttons)
         elif self.state == 'textbox':
-            self.draw_textbox(f"{self.monster.name} is preparing to attack!")
+            self.draw_textbox()  # No need to pass a message, we're using input_text
