@@ -7,7 +7,7 @@ class Options:
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-        pygame.display.set_caption("Studemon")
+        pygame.display.set_caption("Options")
         self.running = True
 
         self.all_sprites = pygame.sprite.Group()

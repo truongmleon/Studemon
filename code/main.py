@@ -5,6 +5,15 @@ from pages.start import Start
 from pages.options import Options
 from pages.lab import Lab
 
+pygame.init()
+pygame.mixer.init()
+
+# Load and play background music
+pygame.mixer.music.load("images/music/Say.mp3")
+pygame.mixer.music.play(-1)  # Loop the music indefinitely
+pygame.mixer.music.set_volume(1)  # Set volume to 100%
+
+
 class Game:
     def __init__(self):
         pygame.init()
