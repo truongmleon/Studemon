@@ -1,6 +1,7 @@
 import pygame
 from settings import *
-
+import random 
+from result import Result
 class UI:
     def __init__(self, monster, data):
         self.data = data
@@ -25,7 +26,9 @@ class UI:
         self.max_chars = 30  # Maximum characters in input box
         
         # Display text box variables
-        self.display_text = f"{self.monster.name} is preparing to attack!"
+        question, answer = random.choice(list(data.items()))
+        self.display_text = f"Question: {question}"
+        self.answer = answer
         self.display_text_lines = []  # For multi-line text
 
 
@@ -45,8 +48,6 @@ class UI:
                             if self.general_options[i] == 'fight':
                                 self.state = 'textbox'  # Switch to textbox state
                                 self.active = True  # Activate text input
-                            else:
-                                print(f"Selected: {self.general_options[i]}")  # Debugging
                 
                 elif self.state == 'textbox':  # Check if clicking in text box
                     box_rect = pygame.Rect(50, WINDOW_HEIGHT - 150, WINDOW_WIDTH - 100, 100)
@@ -54,7 +55,12 @@ class UI:
                         self.active = True  # Activate the input box
                     else:
                         # If they click outside the box but inside textbox state, submit input
-                        print(f"Input submitted: {self.input_text}")
+                        if (self.answer == self.input_text):
+                            r = Result(1)
+                            r.run()
+                        else:
+                            r = Result(0)
+                            r.run()
                         self.active = False
                         # Optionally reset input text or return to general menu
                         # self.input_text = ""
@@ -66,9 +72,13 @@ class UI:
                     if event.key == pygame.K_RETURN:
                         print(f"Input submitted: {self.input_text}")
                         # Process the input (example: update display text based on input)
-                        if self.input_text:
-                            self.set_display_text(f"You entered: {self.input_text}")
-                            self.input_text = ""  # Clear input after submission
+                        if (self.answer == self.input_text):
+                            r = Result(1)
+                            r.run()
+                        else:
+                            r = Result(0)
+                            r.run()
+                        self.input_text = ""  # Clear input after submission
                         self.active = True  # Keep text box active for further input
                         pygame.time.delay(100)
                         pygame.event.clear(pygame.KEYDOWN)  # Clear excess KEYDOWN events
