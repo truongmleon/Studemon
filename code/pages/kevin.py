@@ -1,8 +1,8 @@
 import pygame
 from settings import *
-from pages.kevin import Kevin
+from pages.lab import Lab
 
-class Koa:
+class Kevin:
     def __init__(self, data):
         pygame.init()
         self.data = data
@@ -20,8 +20,12 @@ class Koa:
         # Load the image
         self.image = pygame.image.load("images/characters/Prof.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (int(self.image.get_width() * 21), int(self.image.get_height() * 21)))
+        
+        self.kev = pygame.image.load("images/characters/Kevin.png").convert_alpha()
+        self.kev = pygame.transform.scale(self.kev, (int(self.kev.get_width() * 10), int(self.kev.get_height() * 10)))
 
     def run(self):
+        """ Main game loop for Koa screen """
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -29,21 +33,21 @@ class Koa:
 
                 self.window.fill((255, 255, 255))  # White background
                 textbox = pygame.image.load("images/buttons/textbox.png").convert_alpha()
-                textbox = pygame.transform.scale(textbox, (int(textbox.get_width() * 9), int(textbox.get_height() * 9)))
+                textbox = pygame.transform.scale(textbox, (int(textbox.get_width() * 6), int(textbox.get_height() * 6)))
                 self.window.blit(self.image, (470, -80))
-                self.window.blit(textbox, (100, 100))
+                self.window.blit(self.kev, (100, 300))
+                self.window.blit(textbox, (180, 100))
+                self.window.blit(textbox, (140, 210))
                 
-                self.draw_text("WHAT’S GOOD! Welcome to the world of STUDÉMON! My name is KOA!,", 130, 120)
-                self.draw_text("People call me the STUDÉMON GANGSTA! This world is inhabited by", 130, 140)
-                self.draw_text("creatures called STUDÉMON! For some STUDÉMON are pets. For you,", 130, 160)
-                self.draw_text("you have been doing bad in school, so you are sent here! Myself,", 130, 180)
-                self.draw_text("I’m your underpaid tutor who studies STUDÉMON on the side.", 130, 200)
-                self.draw_text("First, what is your name?", 130, 220)
-                    
+                self.draw_text("Right! I’m not paid enough to care. This is", 210, 120)
+                self.draw_text("my grandson. He's been your rival since you ", 210, 140)
+                self.draw_text("were a baby, Kevin Nguyen-", 210, 160)
+                
+                self.draw_text("I LOVE KESHI AND ICE COFFEE BOBA!!", 160, 230)
+                
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    kevin = Kevin(self.data)
-                    kevin.run()
-
+                    lab = Lab()
+                    lab.run()
 
                 # Update the display
                 pygame.display.flip()

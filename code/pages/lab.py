@@ -21,22 +21,22 @@ class Lab:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+                
+                bg = pygame.image.load("images/other/Lab.png")
+                self.window.blit(bg, (0, 0))
 
-            bg = pygame.image.load("images/other/Lab.png")
-            self.window.blit(bg, (0, 0))
+                img = pygame.image.load("images/characters/Kevin.png").convert_alpha() 
+                img = pygame.transform.scale(img, (int(img.get_width() * 4), int(img.get_height() * 4)))
+                self.window.blit(img, (900, 450))
 
-            img = pygame.image.load("images/characters/Kevin.png").convert_alpha() 
-            img = pygame.transform.scale(img, (int(img.get_width() * 4), int(img.get_height() * 4)))
-            self.window.blit(img, (900, 450))
+                profImg = pygame.image.load("images/characters/Prof.png").convert_alpha() 
+                profImg = pygame.transform.scale(profImg, (int(profImg.get_width() * 4), int(profImg.get_height() * 4)))
+                self.window.blit(profImg, (500, 250))
 
-            profImg = pygame.image.load("images/characters/Prof.png").convert_alpha() 
-            profImg = pygame.transform.scale(profImg, (int(profImg.get_width() * 4), int(profImg.get_height() * 4)))
-            self.window.blit(profImg, (500, 250))
+                self.all_sprites.update(dt)
 
-            self.all_sprites.update(dt)
+                self.all_sprites.draw(self.window)
 
-            self.all_sprites.draw(self.window)
-
-            pygame.display.update()
+                pygame.display.update()
             
         pygame.quit()
