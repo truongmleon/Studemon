@@ -10,7 +10,7 @@ import button
 class Battle:
     def __init__(self, data, player_choice):
         pygame.init()
-
+        self.data = data
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption("Studemon")
         
@@ -38,7 +38,7 @@ class Battle:
         self.oponent = Oponent(oponent_name, self.front_surfs[oponent_name], self.all_sprites)
         
         # UI
-        self.ui = UI(self.monster)
+        self.ui = UI(self.monster, self.data)
 
     def import_assets(self):
         self.back_surfs = folder_importer('images', 'back-sprites')  # Store images as a dictionary
