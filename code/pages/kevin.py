@@ -44,6 +44,8 @@ class Kevin:
                 self.draw_text("were a baby, Kevin Nguyen-", 210, 160)
                 
                 self.draw_text("I LOVE KESHI AND ICE COFFEE BOBA!!", 160, 230)
+                self.draw_text("IMA BEAT U ACADEMICALLY..", 160, 250)
+                self.draw_text("N SLAY U W WORDS", 160, 270)
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     lab = PickStarter(self.data)
