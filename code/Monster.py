@@ -25,6 +25,6 @@ class Oponent(pygame.sprite.Sprite, Creatue):
     def __init__(self, name, surf, groups):
         super().__init__(groups)
         self.image = surf
-        self.rect = self.image.get_rect(midbottom = (770, 456))
+        self.rect = self.image.get_rect(midbottom = (770, 400))
         self.name = name
         self.get_data(name)
