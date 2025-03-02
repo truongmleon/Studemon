@@ -8,7 +8,7 @@ import button
 
 
 class Battle:
-    def __init__(self, data, choice):
+    def __init__(self, data, player_choice):
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -22,12 +22,12 @@ class Battle:
         self.all_sprites = pygame.sprite.Group()
         
         # Data
-        if choice == 1:
-            player_studemon_list = ['Frone']
-        elif choice == 2:
+        if player_choice == 1:
+            player_studemon_list = ['Intiggy']
+        elif player_choice == 2:
             player_studemon_list = ['Noed']
         else:
-            player_studemon_list = ['Intiggy']
+            player_studemon_list = ['Frone']
             
         #player_studemon_list = ['Frone', 'Noed', 'Intiggy'] #change this when sprites
         
@@ -96,7 +96,3 @@ class Battle:
             
         pygame.quit()
         
-if __name__ == "__main__":
-    game = Battle()
-    game.run()
-
