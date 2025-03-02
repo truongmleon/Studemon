@@ -22,8 +22,8 @@ class Battle:
         self.all_sprites = pygame.sprite.Group()
         
         # Data
-        player_studemon_list = ['Noed', 'Frone', 'Intiggy'] #change this when sprites
-        #                                                    Change 'shrek' to "name" when implement
+        player_studemon_list = ['Frone', 'Noed', 'Intiggy'] #change this when sprites
+        
         self.player_studemon = [Monster(name, self.back_surfs.get(name, self.back_surfs[name])) for name in player_studemon_list]
         self.monster = self.player_studemon[0]
         self.all_sprites.add(self.monster)
