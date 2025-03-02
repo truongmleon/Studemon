@@ -8,7 +8,7 @@ import button
 
 
 class Battle:
-    def __init__(self):
+    def __init__(self, data, choice):
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
