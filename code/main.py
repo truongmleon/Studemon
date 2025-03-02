@@ -1,8 +1,8 @@
 import pygame
 from settings import *
 import button
-from start import Start
-from options import Options
+from pages.start import Start
+from pages.options import Options
 
 class Game:
     def __init__(self):
@@ -13,10 +13,8 @@ class Game:
         pygame.display.set_caption("Studemon")
         self.running = True
 
-        # creating sprite goups
         self.all_sprites = pygame.sprite.Group()
 
-        # create a clock object to help track frame rate
         self.clock = pygame.time.Clock()
 
     def run(self):
@@ -45,6 +43,9 @@ class Game:
             start_button = button.Button("start", WINDOW_WIDTH / 2 - 45 * 3 - 20, 300, start_img, 7)
             options_button = button.Button("options", WINDOW_WIDTH / 2 - 45 * 3 - 20, 430, options_img, 7)
             editset_button = button.Button("editset", WINDOW_WIDTH / 2 - 45 * 3 - 20, 560, editset_img, 7)
+            #img = pygame.image.load("images/characters/Kevin.png").convert_alpha() 
+            #img = pygame.transform.scale(img, (int(img.get_width() * 7), int(img.get_height() * 7)))
+            #self.window.blit(img, (0, 0))
 
             if (start_button.draw(self.window)):
                 start = Start()
