@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from battle import Battle
 
 class PickStarter:
     def __init__(self, data):
@@ -72,8 +73,8 @@ class PickStarter:
             # Update the display
             pygame.display.flip()
 
-        pygame.quit()
-        print(f"Player chose: {self.player_choice}")
+        battle = Battle(self.data, self.player_choice)
+        battle.run()
         
     def draw_text(self, text, x, y):
         """ Helper function to draw text on the screen """
