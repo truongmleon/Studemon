@@ -17,7 +17,6 @@ class UI:
 
         # Store button rects for mouse interaction
         self.general_buttons = []
-        self.attack_buttons = []
 
     def input(self):
         """Handle mouse clicks to select menu options."""
@@ -38,7 +37,7 @@ class UI:
                                 print(f"Selected: {self.general_options[i]}")  # Debugging
                 
                 elif self.state == 'textbox':  # Click anywhere to return to main menu
-                    self.state = 'attack'  # Move to attack menu
+                    self.state = 'general'  # Return to general menu
 
     def draw_textbox(self, message):
         """Draws a text box at the bottom of the screen."""
