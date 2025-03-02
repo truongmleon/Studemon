@@ -40,6 +40,22 @@ class Battle:
 
     def run(self):
         """ Game loop """
+        zoom_factor = 1.40  # Zoom in by 2x
+        bg_image = self.bg_surfs['battlebg']  # Original background
+        bg_width, bg_height = bg_image.get_size()
+        
+        # Scale the background to simulate zooming
+        zoomed_bg = pygame.transform.scale(bg_image, (int(bg_width * zoom_factor), int(bg_height * zoom_factor)))
+
+        # Calculate the top-right area of the zoomed background to blit
+        crop_x = int(bg_width * (zoom_factor - 1))  # Start from the top-right corner
+        crop_y = int(bg_height * 0.3)  # Top-right means Y starts at 0
+        crop_width = WINDOW_WIDTH  # Match the display width
+        crop_height = WINDOW_HEIGHT  # Match the display height
+        
+        # Create a Rect for the area of the zoomed background to display
+        crop_rect = pygame.Rect(crop_x, crop_y, crop_width, crop_height)
+
         while self.running:
             # Controling the frame rate and get the delta (dt) in seconds
             dt = self.clock.tick() / 1000
@@ -48,12 +64,15 @@ class Battle:
                 if event.type == pygame.QUIT:
                     self.running = False
             
+            # Draw the cropped section of the zoomed background
+            self.window.blit(zoomed_bg, (0, 0), crop_rect)
 
             # update sprites
             self.all_sprites.update(dt)
+            self.all_sprites.draw(self.window)
 
             # Draw sprites
-            self.window.blit(self.bg_surfs['battlebg'], (0, 0))
+            
             
             # Might have to change this later becuase we will put shrek2 out there later
             # player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)    
