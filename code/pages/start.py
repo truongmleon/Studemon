@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from button import Button
+from pages.koa import Koa
 
 class Start:
     def __init__(self):
@@ -80,10 +81,13 @@ class Start:
 
             self.window.blit(bg, (0, 0))
             if (next_button.draw(self.window)):
-                #call koa here
-                # pass in self.questions to call
-                pass
-
+                data = {}
+                for i in range(len(self.questions)):
+                    data[self.questions[i]] = self.answers[i]
+                
+                koa = Koa(data)
+                koa.run()
+                
             # Draw header
             self.draw_text("Make Your Study Set", 50, 20)
             self.draw_text("Type directly to input the question, press tab to start inputting the answer.", 50, 60)

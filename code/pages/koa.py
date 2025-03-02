@@ -2,8 +2,9 @@ import pygame
 from settings import *
 
 class Koa:
-    def __init__(self):
+    def __init__(self, data):
         pygame.init()
+        self.data = data
         self.running = True
 
         # Set up the display
@@ -11,7 +12,8 @@ class Koa:
         pygame.display.set_caption("Professor Koa")
 
         # Load the image
-        self.image = pygame.image.load("Prof.png").convert_alpha()
+        self.image = pygame.image.load("images/characters/Prof.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_width() * 21), int(self.image.get_height() * 21)))
 
     def run(self):
         """ Main game loop for Koa screen """
@@ -24,7 +26,7 @@ class Koa:
             self.window.fill((255, 255, 255))  # White background
 
             # Draw the image at a specified position
-            self.window.blit(self.image, (100, 100))  # Adjust (100, 100) for your image's position
+            self.window.blit(self.image, (170, -80)) 
 
             # Update the display
             pygame.display.flip()

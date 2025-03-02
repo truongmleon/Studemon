@@ -1,1 +1,0 @@
-start_button.draw(self.window))
