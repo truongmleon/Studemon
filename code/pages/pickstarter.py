@@ -66,9 +66,9 @@ class PickStarter:
             
             self.draw_text("Go ahead and pick a STUDÉMON!", 130, 120)
 
-            self.draw_text("Press 1 for intiggy", 150, 350)
-            self.draw_text("Press 2 for noed", 550, 350)
-            self.draw_text("Press 3 for frone", 1000, 350)
+            self.draw_text("Press 1 for Intiggy", 150, 350)
+            self.draw_text("Press 2 for Noed", 550, 350)
+            self.draw_text("Press 3 for Frone", 1000, 350)
             
             # Update the display
             pygame.display.flip()
