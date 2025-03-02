@@ -88,13 +88,6 @@ class Battle:
             self.ui.update()
 
             # Draw sprites
-            
-            
-            # Might have to change this later becuase we will put shrek2 out there later
-            # player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)    
-            # bg = pygame.image.load("images/logo/shrek.jpg")
-            # self.window.blit(bg, (600, 300)) 
-            
             self.all_sprites.draw(self.window)
             self.ui.draw()
 
