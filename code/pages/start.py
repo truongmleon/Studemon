@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from button import Button
 
 class Start:
     def __init__(self):
@@ -74,7 +75,14 @@ class Start:
 
             # Background image
             bg = pygame.image.load("images/other/startscreen.png")
+            next_img = pygame.image.load("images/buttons/next.png").convert_alpha()
+            next_button = Button("next", WINDOW_WIDTH - 300, 0, next_img, 6)
+
             self.window.blit(bg, (0, 0))
+            if (next_button.draw(self.window)):
+                #call koa here
+                # pass in self.questions to call
+                pass
 
             # Draw header
             self.draw_text("Make Your Study Set", 50, 20)
@@ -84,7 +92,6 @@ class Start:
             # Draw labels
             self.draw_text("Question:", 50, 160)  # Added more space after the header
             self.draw_text("Answer:", WINDOW_WIDTH // 2 + 50, 160)
-
 
             # Draw input boxes
             pygame.draw.rect(self.window, self.box_color_active if self.active_input == 0 else self.box_color_inactive, self.question_box)
@@ -112,9 +119,3 @@ class Start:
         """ Helper function to draw text on the screen """
         text_surface = self.font.render(text, True, self.text_color)
         self.window.blit(text_surface, (x, y))
-
-
-# Run the game
-if __name__ == "__main__":
-    game = Start()
-    game.run()
