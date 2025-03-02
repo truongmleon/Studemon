@@ -37,10 +37,6 @@ class UI:
                                 self.state = 'textbox'  # Switch to textbox state
                             else:
                                 print(f"Selected: {self.general_options[i]}")  # Debugging
-                
-                elif self.state == 'textbox':  # Click anywhere to return to main menu
-                    print("Mouse clicked in textbox state, returning to 'general'")
-                    self.state = 'general'  # Return to general menu
 
             # Process the Enter key only once
             elif event.type == pygame.KEYDOWN:
