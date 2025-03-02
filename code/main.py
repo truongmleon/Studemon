@@ -1,20 +1,13 @@
 import pygame
 from settings import *
 import button
-<<<<<<< HEAD
-=======
 from start import Start
->>>>>>> main
 
 class Game:
     def __init__(self):
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-<<<<<<< HEAD
-=======
-
->>>>>>> main
         pygame.display.set_caption("Studemon")
         self.running = True
 
@@ -31,53 +24,10 @@ class Game:
         self.button_img = pygame.image.load("path/to/button_image.png").convert_alpha()
         
 
-<<<<<<< HEAD
-    def handle_events(self):
-        """ Handle events """
-        keys = pygame.key.get_pressed()
-        
-        if keys[pygame.K_w]:
-            player_pos.y -= 300 * dt
-        if keys[pygame.K_s]:
-            player_pos.y += 300 * dt
-        if keys[pygame.K_a]:
-            player_pos.x -= 300 * dt
-        if keys[pygame.K_d]:
-            player_pos.x += 300 * dt
-            
-        # Event handling
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
-                    
-    def render(self):
-        """ Draw everything """
-        # Draw the background
-        self.window.blit(self.bg, (0, -300))
-        
-        # Draw the button
-        self.draw(self.window, (255, 0, 0))
-        
-        # Draw the player
-        pygame.draw.circle(self.window, COLORS['black'], self.player_pos, 10)
-        
-        self.all_sprites.draw(self.window)
-        
-        pygame.display.flip()
-        
-    def update(self):
-        self.all_sprites.update(self.dt)
-
-=======
->>>>>>> main
     def run(self):
         """ Game loop """
         while self.running:
 
-<<<<<<< HEAD
-            # Controling the frame rate to 60 FPS
-            self.clock.tick(60) / 1000
-=======
             # Controling the frame rate and get the delta (dt) in seconds
             dt = self.clock.tick() / 1000
 
@@ -114,7 +64,6 @@ class Game:
 
             # Draw sprites
             self.all_sprites.draw(self.window)
->>>>>>> main
 
             self.handle_events()
             self.update()
