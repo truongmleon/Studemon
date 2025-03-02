@@ -17,9 +17,11 @@ class UI:
 
         # Store button rects for mouse interaction
         self.general_buttons = []
+        pygame.key.set_repeat(0)  # Disable key repeat to avoid multiple events
+
 
     def input(self):
-        """Handle mouse clicks to select menu options."""
+        """Handle mouse clicks and keyboard input."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -37,7 +39,18 @@ class UI:
                                 print(f"Selected: {self.general_options[i]}")  # Debugging
                 
                 elif self.state == 'textbox':  # Click anywhere to return to main menu
+                    print("Mouse clicked in textbox state, returning to 'general'")
                     self.state = 'general'  # Return to general menu
+
+            # Process the Enter key only once
+            elif event.type == pygame.KEYDOWN:
+                if self.state == 'textbox' and event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                    print("Enter pressed! Changing state to 'general'")  # Debugging
+                    self.state = 'general'  # Return to general menu
+                    pygame.time.delay(100)
+                    # Prevent multiple Enter key detections
+                    pygame.event.clear(pygame.KEYDOWN)  # Only remove excess KEYDOWN events
+
 
     def draw_textbox(self, message):
         """Draws a text box at the bottom of the screen."""
