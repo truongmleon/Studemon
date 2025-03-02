@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from support import *
 from monster import Monster, Oponent
+from ui import UI
 from random import choice
 import button
 
@@ -28,6 +29,9 @@ class Battle:
         self.all_sprites.add(self.monster)
         #oponent_name = choice(list(MONSTER_DATA.keys()))
         self.oponent = Oponent("Frubber", self.back_surfs['shrek'], self.all_sprites)
+        
+        # UI
+        self.ui = UI(self.monster)
 
     def import_assets(self):
         self.back_surfs = folder_importer('images', 'logo')  # Store images as a dictionary
@@ -49,7 +53,7 @@ class Battle:
             self.all_sprites.update(dt)
 
             # Draw sprites
-            self.window.blit(self.bg_surfs['Lab'], (0, 0))
+            self.window.blit(self.bg_surfs['battlebg'], (0, 0))
             
             # Might have to change this later becuase we will put shrek2 out there later
             #player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)    
@@ -57,6 +61,7 @@ class Battle:
             # self.window.blit(bg, (600, 300)) 
             
             self.all_sprites.draw(self.window)
+            self.ui.draw()
 
             # update the display
             pygame.display.update()
