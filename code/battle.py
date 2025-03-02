@@ -1,21 +1,35 @@
 import pygame
 from settings import *
+from support import *
+from timer import Timer
 import button
 
-class Start:
+
+class Battle:
     def __init__(self):
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
         pygame.display.set_caption("Studemon")
+        
+         # create a clock object to help track frame rate
+        self.clock = pygame.time.Clock()
+        
         self.running = True
+        self.import_assets()
 
         # creating sprite goups
         self.all_sprites = pygame.sprite.Group()
+        
+        # data
+        player_studemon_list = ['Nod']
+        self.player_studemon = [Monster(name, self.back_surf(name)) for name in player_studemon_list]
 
-        # create a clock object to help track frame rate
-        self.clock = pygame.time.Clock()
+    def import_assets(self):
+        self.back_surf = folder_importer('images', 'logo', 'shrek.jpg')
+        print(self.back_surf)
+
 
     def run(self):
         """ Game loop """
@@ -48,5 +62,5 @@ class Start:
     
 # Run the game
 if __name__ == "__main__":
-    game = Start()
+    game = Battle()
     game.run()
