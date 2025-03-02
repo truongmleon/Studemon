@@ -15,7 +15,6 @@ class Options:
         self.clock = pygame.time.Clock()
 
     def run(self):
-        """ Game loop """
         while self.running:
             dt = self.clock.tick() / 1000
 
@@ -23,7 +22,6 @@ class Options:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)    
             bg = pygame.image.load("images/other/startscreen.png")
             self.window.blit(bg, (0, -300))
 
