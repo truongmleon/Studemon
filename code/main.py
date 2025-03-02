@@ -3,6 +3,7 @@ from settings import *
 import button
 from pages.start import Start
 from pages.options import Options
+from pages.editset import EditSet
 
 class Game:
     def __init__(self):
@@ -18,7 +19,6 @@ class Game:
         self.clock = pygame.time.Clock()
 
     def run(self):
-        """ Game loop """
         while self.running:
 
             # Controling the frame rate and get the delta (dt) in seconds
