@@ -1,6 +1,7 @@
 import pygame
 from button2 import Button2
 from settings import *
+from button import Button
 
 class Options:
     def __init__(self):
@@ -21,6 +22,10 @@ class Options:
         self.stop_button = Button2(50, 300, 200, 50, "Stop Music", self.font, (255, 255, 255), (209, 108, 108))
         self.volume_up_button = Button2(300, 100, 200, 50, "Volume +", self.font, (255, 255, 255), (208, 150, 219))
         self.volume_down_button = Button2(300, 200, 200, 50, "Volume -", self.font, (255, 255, 255), (208, 150, 219))
+
+        # Back button
+        self.back_img = pygame.image.load("images/buttons/back.png").convert_alpha()
+        self.back_button = Button("back", WINDOW_WIDTH / 2 - 45 * 3 - 20, 430, self.back_img, 7)
 
         # Current volume level
         self.volume = 0.5  # Default volume (50%)
@@ -52,7 +57,14 @@ class Options:
             bg = pygame.image.load("images/other/startscreen.png")
             self.window.blit(bg, (0, -300))
 
-            # Draw buttons
+            # Draw back button
+            if self.back_button.draw(self.window):
+                from main import Game
+                self.running = False  # Stop the options screen
+                main = Game()
+                main.run()  # Switch to the main screen
+
+            # Draw other buttons
             self.pause_button.draw(self.window)
             self.unpause_button.draw(self.window)
             self.stop_button.draw(self.window)
