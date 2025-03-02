@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from support import *
 from timer import Timer
+from monster import Monster
 import button
 
 
