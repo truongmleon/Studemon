@@ -22,20 +22,20 @@ class Battle:
         self.all_sprites = pygame.sprite.Group()
         
         # Data
-        player_studemon_list = ['Nod'] #change this when sprites
+        player_studemon_list = ['Noed', 'Frone', 'Intiggy'] #change this when sprites
         #                                                    Change 'shrek' to "name" when implement
-        self.player_studemon = [Monster(name, self.back_surfs.get(name, self.back_surfs['shrek'])) for name in player_studemon_list]
+        self.player_studemon = [Monster(name, self.back_surfs.get(name, self.back_surfs[name])) for name in player_studemon_list]
         self.monster = self.player_studemon[0]
         self.all_sprites.add(self.monster)
-        #oponent_name = choice(list(MONSTER_DATA.keys()))
-        self.oponent = Oponent("Frubber", self.back_surfs['shrek'], self.all_sprites)
+        oponent_name = choice(list(MONSTER_DATA.keys()))
+        self.oponent = Oponent(oponent_name, self.front_surfs[oponent_name], self.all_sprites)
         
         # UI
         self.ui = UI(self.monster)
 
     def import_assets(self):
-        self.back_surfs = folder_importer('images', 'logo')  # Store images as a dictionary
-        self.front_sufs = folder_importer('images', 'logo')
+        self.back_surfs = folder_importer('images', 'back-sprites')  # Store images as a dictionary
+        self.front_surfs = folder_importer('images', 'studemon-sprites')
         self.bg_surfs = folder_importer('images', 'other')
 
     def run(self):
