@@ -23,6 +23,10 @@ class UI:
         self.input_text = ""
         self.active = False
         self.max_chars = 30  # Maximum characters in input box
+        
+        # Display text box variables
+        self.display_text = f"{self.monster.name} is preparing to attack!"
+        self.display_text_lines = []  # For multi-line text
 
 
     def input(self):
@@ -61,10 +65,11 @@ class UI:
                 if self.state == 'textbox':
                     if event.key == pygame.K_RETURN:
                         print(f"Input submitted: {self.input_text}")
-                        self.active = False
-                        self.state = 'general'  # Return to general menu
-                        # Optionally reset input text
-                        # self.input_text = ""
+                        # Process the input (example: update display text based on input)
+                        if self.input_text:
+                            self.set_display_text(f"You entered: {self.input_text}")
+                            self.input_text = ""  # Clear input after submission
+                        self.active = True  # Keep text box active for further input
                         pygame.time.delay(100)
                         pygame.event.clear(pygame.KEYDOWN)  # Clear excess KEYDOWN events
                     elif event.key == pygame.K_BACKSPACE:
@@ -78,7 +83,52 @@ class UI:
                             self.input_text += event.unicode
 
 
-    def draw_textbox(self, message=None):
+    def draw_display_box(self):
+        """Draws a large text box for displaying game messages above the input box."""
+        # Position the display box above the input box
+        box_rect = pygame.Rect(50, WINDOW_HEIGHT - 300, WINDOW_WIDTH - 100, 130)
+        
+        # Draw display box
+        pygame.draw.rect(self.window, COLORS['white'], box_rect, 0, 4)
+        pygame.draw.rect(self.window, COLORS['black'], box_rect, 4, 4)
+        
+        # Format text to fit within box (simple word wrap)
+        if not self.display_text_lines:
+            self._wrap_text(self.display_text, box_rect.width - 40)
+            
+        # Draw each line of text
+        for i, line in enumerate(self.display_text_lines):
+            text_surf = self.font.render(line, True, COLORS['black'])
+            text_rect = text_surf.get_rect(topleft=(box_rect.left + 20, box_rect.top + 20 + i * 40))
+            self.window.blit(text_surf, text_rect)
+    
+    def _wrap_text(self, text, max_width):
+        """Breaks text into lines that fit within the given width."""
+        self.display_text_lines = []
+        words = text.split(' ')
+        current_line = words[0]
+        
+        for word in words[1:]:
+            # Test width with new word added
+            test_line = current_line + ' ' + word
+            test_surf = self.font.render(test_line, True, COLORS['black'])
+            
+            if test_surf.get_width() <= max_width:
+                current_line = test_line  # Word fits, add it to current line
+            else:
+                self.display_text_lines.append(current_line)  # Line is full, store it
+                current_line = word  # Start a new line with the word
+        
+        # Don't forget to add the last line
+        if current_line:
+            self.display_text_lines.append(current_line)
+    
+    def set_display_text(self, new_text):
+        """Updates the text shown in the display box."""
+        self.display_text = new_text
+        self.display_text_lines = []  # Clear cached lines to force re-wrap
+            
+    def draw_input_box(self):
         """Draws an input text box at the bottom of the screen."""
         box_rect = pygame.Rect(50, WINDOW_HEIGHT - 150, WINDOW_WIDTH - 100, 100)
         
@@ -147,4 +197,5 @@ class UI:
         if self.state == 'general':
             self.quad_select(self.general_index, self.general_options, self.general_buttons)
         elif self.state == 'textbox':
-            self.draw_textbox()  # No need to pass a message, we're using input_text
+            self.draw_display_box()  # Draw the display text box first
+            self.draw_input_box()    # Then draw the input box below it
