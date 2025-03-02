@@ -8,7 +8,6 @@ class Creature:
         self.element = MONSTER_DATA[name]['element']
         self.health = self.max_health = MONSTER_DATA[name]['health']
         self.name = name
-        print(self.name, self.element, self.health)
 
 class Monster(pygame.sprite.Sprite, Creature):
     def __init__(self, name, surf):
