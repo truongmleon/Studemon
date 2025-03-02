@@ -2,7 +2,8 @@ import pygame
 from settings import *
 
 class UI:
-    def __init__(self, monster):
+    def __init__(self, monster, data):
+        self.data = data
         self.window = pygame.display.get_surface()
         self.font = pygame.font.Font(None, 36)
         self.left = WINDOW_WIDTH / 2 - 100
