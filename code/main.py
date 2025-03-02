@@ -2,6 +2,7 @@ import pygame
 from settings import *
 import button
 from start import Start
+from options import Options
 
 class Game:
     def __init__(self):
@@ -44,28 +45,23 @@ class Game:
             start_button = button.Button("start", WINDOW_WIDTH / 2 - 45 * 3 - 20, 300, start_img, 7)
             options_button = button.Button("options", WINDOW_WIDTH / 2 - 45 * 3 - 20, 430, options_img, 7)
             editset_button = button.Button("editset", WINDOW_WIDTH / 2 - 45 * 3 - 20, 560, editset_img, 7)
-            
-        
+
             if (start_button.draw(self.window)):
                 start = Start()
                 start.run()
             if (options_button.draw(self.window)):
-                pass
+                options = Options()
+                options.run()
             if (editset_button.draw(self.window)):
                 pass
-            # update sprites
-            self.all_sprites.update(dt)
 
-            # Draw sprites
+            self.all_sprites.update(dt)
             self.all_sprites.draw(self.window)
 
-            # update the display
             pygame.display.update()
             
         pygame.quit()
 
-    
-# Run the game
 if __name__ == "__main__":
     game = Game()
     game.run()
