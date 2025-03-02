@@ -3,6 +3,7 @@ from settings import *
 import button
 from pages.start import Start
 from pages.options import Options
+from pages.lab import Lab
 
 class Game:
     def __init__(self):
