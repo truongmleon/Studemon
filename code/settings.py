@@ -21,7 +21,7 @@ MONSTER_DATA = {
 }
 
 ABILITIES_DATA = {
-  	'scratch': {'damage': 20,  'element': 'normal', 'animation': 'scratch'},
+  	'tackle': {'damage': 20,  'element': 'normal', 'animation': 'scratch'},
     'fireball':   {'damage': 35,  'element': 'fire',   'animation': 'fire'},
     'nuke':    {'damage': 50,  'element': 'fire',   'animation': 'explosion'},
     'splash':  {'damage': 30,  'element': 'water',  'animation': 'splash'},

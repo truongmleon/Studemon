@@ -27,7 +27,7 @@ class Battle:
         self.monster = self.player_studemon[0]
         self.all_sprites.add(self.monster)
         #oponent_name = choice(list(MONSTER_DATA.keys()))
-        self.oponent = Oponent('Frubber', self.back_surfs['shrek'], self.all_sprites)
+        self.oponent = Oponent("Frubber", self.back_surfs['shrek'], self.all_sprites)
 
     def import_assets(self):
         self.back_surfs = folder_importer('images', 'logo')  # Store images as a dictionary

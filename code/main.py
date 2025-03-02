@@ -19,12 +19,16 @@ class Game:
 
     def run(self):
         while self.running:
-    
+
+            # Controling the frame rate and get the delta (dt) in seconds
             dt = self.clock.tick() / 1000
 
+            # Event handling
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+
+            player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)    
 
             bg = pygame.image.load("images/other/startscreen.png")
             logo = pygame.image.load("images/logo/logo.png")
@@ -35,7 +39,7 @@ class Game:
             options_img = pygame.image.load("images/buttons/options.png").convert_alpha()  
                         
             start_button = button.Button("start", WINDOW_WIDTH / 2 - 45 * 3 - 20, 300, start_img, 7)
-            options_button = button.Button("options", WINDOW_WIDTH / 2 - 45 * 3 - 20, 470, options_img, 7)
+            options_button = button.Button("options", WINDOW_WIDTH / 2 - 45 * 3 - 20, 430, options_img, 7)
 
             img = pygame.image.load("images/characters/Kevin.png").convert_alpha() 
             img = pygame.transform.scale(img, (int(img.get_width() * 7), int(img.get_height() * 7)))
