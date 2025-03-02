@@ -70,6 +70,8 @@ class Battle:
             # update sprites
             self.all_sprites.update(dt)
             self.all_sprites.draw(self.window)
+            
+            self.ui.update()
 
             # Draw sprites
             
