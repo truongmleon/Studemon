@@ -17,8 +17,12 @@ class UI:
 
         # Store button rects for mouse interaction
         self.general_buttons = []
+<<<<<<< HEAD
         pygame.key.set_repeat(0)  # Disable key repeat to avoid multiple events
 
+=======
+        self.attack_buttons = []
+>>>>>>> 85b6d213efd94f90fc7eeceef184d520e2866275
 
     def input(self):
         """Handle mouse clicks and keyboard input."""
@@ -39,8 +43,12 @@ class UI:
                                 print(f"Selected: {self.general_options[i]}")  # Debugging
                 
                 elif self.state == 'textbox':  # Click anywhere to return to main menu
+<<<<<<< HEAD
                     print("Mouse clicked in textbox state, returning to 'general'")
                     self.state = 'general'  # Return to general menu
+=======
+                    self.state = 'attack'  # Move to attack menu
+>>>>>>> 85b6d213efd94f90fc7eeceef184d520e2866275
 
             # Process the Enter key only once
             elif event.type == pygame.KEYDOWN:
