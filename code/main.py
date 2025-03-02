@@ -8,6 +8,7 @@ class Game:
         pygame.init()
 
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
         pygame.display.set_caption("Studemon")
         self.running = True
 
@@ -16,13 +17,6 @@ class Game:
 
         # create a clock object to help track frame rate
         self.clock = pygame.time.Clock()
-        
-        # player position (center of the screen)
-        self.player_pos = pygame.Vector2(self.window.get_width() / 2, self.window.get_height() / 2)
-        
-        self.bg = pygame.image.load("path/to/background_image.png").convert_alpha()
-        self.button_img = pygame.image.load("path/to/button_image.png").convert_alpha()
-        
 
     def run(self):
         """ Game loop """
@@ -65,9 +59,6 @@ class Game:
             # Draw sprites
             self.all_sprites.draw(self.window)
 
-            self.handle_events()
-            self.update()
-            self.render()
             # update the display
             pygame.display.update()
             
